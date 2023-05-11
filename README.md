@@ -33,7 +33,7 @@ python main.py
 Get Ready to Save the Galaxy!
 
 <p style="margin: center">
-<img href="https://i.ibb.co/Sdk5565/Screenshot-from-2023-05-10-23-36-52.png" alt="Starship vs Asteroids">
+<img src="https://i.ibb.co/Sdk5565/Screenshot-from-2023-05-10-23-36-52.png" alt="Starship vs Asteroids">
  </p>
    
    
