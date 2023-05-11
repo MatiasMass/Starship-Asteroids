@@ -1,5 +1,8 @@
 ## Starship vs Asteroids
-
+<p align="center">
+<img src="https://i.ibb.co/Sdk5565/Screenshot-from-2023-05-10-23-36-52.png" alt="Starship vs Asteroids">
+ </p>
+ 
 Are you ready for an intergalactic adventure? Take control of a powerful starship and defend the galaxy against a relentless swarm of asteroids in "Starship vs Asteroids"!
 
 ### How to Play
@@ -32,8 +35,6 @@ python main.py
 
 Get Ready to Save the Galaxy!
 
-<p style="margin: center">
-<img src="https://i.ibb.co/Sdk5565/Screenshot-from-2023-05-10-23-36-52.png" alt="Starship vs Asteroids">
- </p>
+
    
    
