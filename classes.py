@@ -33,12 +33,15 @@ class Window:
     def draw(self):
         pygame.display.update()
 
+    def fill(self):
+        self.surface.fill((255, 255, 255))
+
     def blit(self):            
         self.surface.blit(self.background_image, (0, 0))
 
     def get_surface(self):
         return self.surface
-    
+
 class Starship:
     move_left = move_right = move_up = move_down = False
     speed = 10
@@ -47,14 +50,14 @@ class Starship:
         self.image = pygame.image.load(image_path).convert_alpha()
         self.image = pygame.transform.scale(self.image, (100, 150))
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.center = (x, y)
+        self.rect.height -= 50
+        self.rect.y = self.rect.y - self.rect.height / 2
 
     def draw(self, surface):
-        surface.blit(self.image, (self.rect.x, self.rect.y))
-
-    def shot(self):
-        print("shotted")
+        # dibujar rectangulo rojo
+        # pygame.draw.rect(surface, (255, 0, 0), self.rect, 2)
+        surface.blit(self.image, self.rect.topleft)
 
 
 class Bullet:

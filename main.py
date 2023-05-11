@@ -13,13 +13,26 @@ if __name__ == "__main__":
 
     # colors
     WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
 
     # Window
     background_image = "images/background.jpg"
-    window = Window(600, 700, "Space Meteor", background_image)
+    window = Window(600, 700, "Starship vs Asteroids", background_image)
 
-    starship_image = "images/starship.png"
+
     asteroid_image = "images/asteroid.png"
+
+    window.fill()
+    draw_text("Starship vs Asteroids", font, window.get_surface(), 150, window.height / 3, BLACK)
+    draw_text("Press 1, 2 or 3 to choose a starship", font, window.get_surface(), 20, window.height / 2, BLACK)
+
+    pygame.display.update()
+    
+    starship_chose = choose_starship()
+
+
+
+    starship_image = f"images/starship{starship_chose}.png"
 
     # Game loop
     while True:
@@ -147,8 +160,8 @@ if __name__ == "__main__":
             pygame.time.Clock().tick(60)
 
         # Game over
-        draw_text("Game Over", font, window.get_surface(), window.width / 2, window.height / 2, WHITE)
-        draw_text("Press any key to play again", font, window.get_surface(), window.width / 2, window.height / 2 + 50, WHITE)
+        draw_text("Game Over", font, window.get_surface(), window.width / 2 - 100, window.height / 2 - 100, WHITE)
+        draw_text("Press any key to play again", font, window.get_surface(), 100, window.height / 2 + 50, WHITE)
 
         pygame.display.update()
-        game_over()
+        wait()

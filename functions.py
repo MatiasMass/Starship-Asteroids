@@ -14,7 +14,7 @@ def draw_text(text, font, surface, x, y, TEXTCOLOR):
     surface.blit(textobj, textrect)
 
 
-def game_over():
+def wait():
 
     waiting = True    
     
@@ -27,3 +27,29 @@ def game_over():
 
             if event.type == KEYDOWN:
                 waiting = False
+
+
+def choose_starship():
+    waiting = True    
+    
+    while waiting:
+        
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+                terminate()
+                
+            if event.type == KEYDOWN:
+            
+                if event.key == K_1:
+                    return 1
+                    waiting = False
+                    break
+                if event.key == K_2:
+                    return 2
+                    waiting = False
+                    break
+                if event.key == K_3:
+                    return 3
+                    waiting = False
+                    break
