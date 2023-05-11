@@ -62,7 +62,7 @@ class Starship:
 
 class Bullet:
     color = (255, 255, 255)
-    speed = 10
+    speed = 13
 
     def __init__(self, x, y, number):
         self.number = number
