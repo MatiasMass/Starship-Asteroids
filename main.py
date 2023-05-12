@@ -21,6 +21,10 @@ if __name__ == "__main__":
 
 
     asteroid_image = "images/asteroid.png"
+    
+    earth_path = "images/earth.png"
+    earth_image = pygame.image.load(earth_path).convert_alpha()
+    earth_image = pygame.transform.scale(earth_image, (100, 100))
 
     window.fill()
     draw_text("Starship vs Asteroids", font, window.get_surface(), 150, window.height / 3, BLACK)
@@ -44,6 +48,9 @@ if __name__ == "__main__":
         # Bullets
         bullets = []
 
+        # Score
+        score = 0
+
         # Asteroids
         asteroids = []
 
@@ -66,38 +73,17 @@ if __name__ == "__main__":
                     terminate()
 
                 if event.type == KEYDOWN:
-                    if event.key == K_d or event.key == K_RIGHT:
-                        starship.move_right = True
-                        starship.move_left = False
-                    if event.key == K_a or event.key == K_LEFT:
-                        starship.move_left = True
-                        starship.move_right = False
-                    if event.key == K_w or event.key == K_UP:
-                        starship.move_up = True
-                        starship.move_down = False
-                    if event.key == K_s or event.key == K_DOWN:
-                        starship.move_down = True
-                        starship.move_up = False                   
                     if event.key == K_SPACE:
                         bullet_1 = Bullet(starship.rect.left, starship.rect.top + 10, 1)
                         bullet_2 = Bullet(starship.rect.right - 10, starship.rect.top, 2)
                         bullets.append(bullet_1)
                         bullets.append(bullet_2)
 
-
                 if event.type == KEYUP:
                     if event.key == K_ESCAPE:
                         terminate()
-                    if event.key == K_d or event.key == K_RIGHT:
-                        starship.move_right = False
-                    if event.key == K_a or event.key == K_LEFT:
-                        starship.move_left = False
-                    if event.key == K_w or event.key == K_UP:
-                        starship.move_up = False
-                    if event.key == K_s or event.key == K_DOWN:
-                        starship.move_down = False
-                    if event.key == K_SPACE:
-                        pass
+                
+                starship.keyboard_events(event)
 
             # Move starship
             if starship.move_right and starship.rect.right < window.width:
@@ -112,13 +98,15 @@ if __name__ == "__main__":
 
             # Update
             window.blit()
-            
+            window.draw(earth_image, window.width / 2 - 50, window.height - 100)
+
             # Draw
             starship.draw(window.get_surface())
             
             if len(asteroids) != 0:
                 for asteroid in asteroids[::]:
                     asteroid.draw(window.get_surface())
+                    asteroid.draw_health_bar(window.get_surface())
                     asteroid.move()
                     if asteroid.rect.top > window.height:
                         asteroids.remove(asteroid)
@@ -144,15 +132,22 @@ if __name__ == "__main__":
 
                 for asteroid in asteroids[::]:
                     if bullet.rect.colliderect(asteroid.rect):
-                        asteroids.remove(asteroid)
-                        bullets.remove(bullet)
-                        break
+                        asteroid.health -= 20
+                        if asteroid.health == 0:
+                            asteroids.remove(asteroid)
+                            score += 1
+                            break
+                        if bullet in bullets:
+                            bullets.remove(bullet)
+        
+                        
 
                 if bullet.rect.bottom < 0:
                     if bullet in bullets:  # Verificar si el objeto aún está en la lista
                         bullets.remove(bullet)
                     continue
-
+            
+            draw_text(f"Score: {score}", font, window.get_surface(), 10, 10, WHITE)
 
             pygame.display.update()
 

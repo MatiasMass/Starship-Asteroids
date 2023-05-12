@@ -10,6 +10,7 @@ class Asteroid:
         self.rect.x = x
         self.rect.y = y
         self.speed = speed
+        self.health = 100
     
     def draw(self, surface):
         surface.blit(self.image, (self.rect.x, self.rect.y))
@@ -19,6 +20,24 @@ class Asteroid:
 
     def scale(self, width, height):
         self.image = pygame.transform.scale(self.image, (width, height))
+
+    def draw_health_bar(self, surface):
+        bar_width = self.rect.width  # Anchura de la barra de vida igual al tamaño del asteroide
+        bar_height = 5  # Altura de la barra de vida
+        bar_x = self.rect.x  # Posición X de la barra de vida igual a la posición X del asteroide
+        bar_y = self.rect.y + self.rect.width + 5  # Posición Y de la barra de vida debajo del asteroide
+
+        # Calcula el porcentaje de vida actual del asteroide
+        health_percentage = self.health / 100.0
+
+        # Calcula la longitud del rectángulo de la barra de vida según el porcentaje de vida
+        bar_length = int(bar_width * health_percentage)
+
+        # Dibuja el fondo de la barra de vida (en rojo)
+        pygame.draw.rect(surface, (255, 0, 0), (bar_x, bar_y, bar_width, bar_height))
+
+        # Dibuja la parte llena de la barra de vida (en verde)
+        pygame.draw.rect(surface, (0, 255, 0), (bar_x, bar_y, bar_length, bar_height))
 
 class Window:
     def __init__(self, width, height, caption, image_path):
@@ -38,6 +57,9 @@ class Window:
 
     def blit(self):            
         self.surface.blit(self.background_image, (0, 0))
+
+    def draw(self, image, posx, posy):
+        self.surface.blit(image, (posx, posy))
 
     def get_surface(self):
         return self.surface
@@ -59,6 +81,34 @@ class Starship:
         # pygame.draw.rect(surface, (255, 0, 0), self.rect, 2)
         surface.blit(self.image, self.rect.topleft)
 
+    def keyboard_events(self, event):
+        if event.type == KEYDOWN:
+            if event.key == K_d or event.key == K_RIGHT:
+                self.move_right = True
+                self.move_left = False
+            if event.key == K_a or event.key == K_LEFT:
+                self.move_left = True
+                self.move_right = False
+            if event.key == K_w or event.key == K_UP:
+                self.move_up = True
+                self.move_down = False
+            if event.key == K_s or event.key == K_DOWN:
+                self.move_down = True
+                self.move_up = False                   
+
+
+        if event.type == KEYUP:
+
+            if event.key == K_d or event.key == K_RIGHT:
+                self.move_right = False
+            if event.key == K_a or event.key == K_LEFT:
+                self.move_left = False
+            if event.key == K_w or event.key == K_UP:
+                self.move_up = False
+            if event.key == K_s or event.key == K_DOWN:
+                self.move_down = False
+            if event.key == K_SPACE:
+                pass
 
 class Bullet:
     color = (255, 255, 255)
