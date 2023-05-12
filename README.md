@@ -1,6 +1,6 @@
-## Starship vs Asteroids
+## Starship vs Asteroids 
 <p align="center">
-<img src="https://i.ibb.co/Sdk5565/Screenshot-from-2023-05-10-23-36-52.png" alt="Starship vs Asteroids">
+<img src="https://i.ibb.co/NYFSs6f/Screenshot-from-2023-05-12-13-20-32.png" alt="Starship vs Asteroids">
  </p>
  
 Are you ready for an intergalactic adventure? Take control of a powerful starship and defend the galaxy against a relentless swarm of asteroids in "Starship vs Asteroids"!
